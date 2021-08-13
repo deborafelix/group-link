@@ -1,8 +1,9 @@
-const express = require('express')
-const routes = require('./routes/routes')
-const app = express()
+import express from 'express';
+import routes from './routes';
 
-const mongoose = require('mongoose')
+const app = express();
+
+const mongoose = require('mongoose');
 
 app.use(express.json());
 app.use('/grouplink', routes);
@@ -10,16 +11,13 @@ app.use('/grouplink', routes);
 mongoose
   .connect('mongodb://admin:password@localhost:27017/grouplink?authSource=admin', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
-  .then(result => {
+  .then(() => {
     console.log('>>>> MongoDB UP');
   })
-  .catch(error => {
+  .catch((error: Error) => {
     console.log(error);
   });
 
-
-
-
-module.exports = app;
+export default app;
