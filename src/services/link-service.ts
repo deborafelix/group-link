@@ -1,4 +1,5 @@
-import LinksSchema from '../database/link-db';
+import { getMongoRepository } from 'typeorm';
+import Link from '../entities/Link';
 
 export interface ICreateLinkFields {
     group: string,
@@ -6,27 +7,33 @@ export interface ICreateLinkFields {
 }
 
 export function create(fields: ICreateLinkFields) {
+  const linkRepository = getMongoRepository(Link);
   const { group, url } = fields;
-  return LinksSchema.create({
+  const link = linkRepository.create({
     group,
     url,
   });
+  return linkRepository.save(link);
 }
 
 export function readAll() {
-  return LinksSchema.find();
+  const linkRepository = getMongoRepository(Link);
+  return linkRepository.find();
 }
 
 export function readOneGroup(group: string) {
-  return LinksSchema.find({ group });
+  const linkRepository = getMongoRepository(Link);
+  return linkRepository.find({ group });
 }
 
 export function update(id: string, updatedField: Partial<ICreateLinkFields>) {
-  return LinksSchema.updateOne({
-    _id: id,
+  const linkRepository = getMongoRepository(Link);
+  return linkRepository.updateOne({
+    id,
   }, updatedField);
 }
 
 export function remove(id: string) {
-  return LinksSchema.deleteOne({ _id: id });
+  const linkRepository = getMongoRepository(Link);
+  return linkRepository.deleteOne({ id });
 }

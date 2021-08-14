@@ -1,0 +1,13 @@
+{
+   "type": "mongodb",
+   "url": "mongodb://admin:password@localhost:27017",
+   "synchronize": true,
+   "logging": false,
+   "useUnifiedTopology": true,
+   "entities": [
+      "src/entities/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/entities"
+   }
+}
