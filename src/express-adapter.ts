@@ -1,12 +1,7 @@
 import { Request, Response } from 'express';
+import IRequestPayload from './interfaces/RequestPayloadInterface';
 
-export interface IRequestPayload {
-    body: Record<string, any>,
-    params: Record<string, any>,
-    query: Record<string, any>
-}
-
-export function adapt(fn: Function) {
+export default function adapt(fn: Function) {
   return async (req: Request, res: Response) => {
     try {
       const { body, params, query } = req;
