@@ -1,8 +1,10 @@
-import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import ListOneGroupService from '../services/ListOneGroupService';
 import { ok } from '../helpers/http-helper';
 
-class ListOneGroupController {
+import IBaseController from '../interfaces/BaseControllerInterface';
+import IRequestPayload from '../interfaces/RequestPayloadInterface';
+
+class ListOneGroupController implements IBaseController {
   async handle(payload: IRequestPayload) {
     const listOneGroupService = new ListOneGroupService();
     const { group } = payload.params;

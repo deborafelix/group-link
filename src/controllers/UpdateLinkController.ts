@@ -1,8 +1,10 @@
 import { badRequest, noContent } from '../helpers/http-helper';
-import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import UpdateLinkService from '../services/UpdateLinkService';
 
-class UpdateLinkController {
+import IBaseController from '../interfaces/BaseControllerInterface';
+import IRequestPayload from '../interfaces/RequestPayloadInterface';
+
+class UpdateLinkController implements IBaseController {
   async handle(payload: IRequestPayload) {
     const updateLinkService = new UpdateLinkService();
     const { group, url, id } = payload.body;

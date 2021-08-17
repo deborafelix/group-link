@@ -1,8 +1,10 @@
-import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import RemoveLinkService from '../services/RemoveLinkService';
 import { badRequest, noContent } from '../helpers/http-helper';
 
-class RemoveLinkController {
+import IBaseController from '../interfaces/BaseControllerInterface';
+import IRequestPayload from '../interfaces/RequestPayloadInterface';
+
+class RemoveLinkController implements IBaseController {
   async handle(payload: IRequestPayload) {
     const removeLinkService = new RemoveLinkService();
     const { id } = payload.params;

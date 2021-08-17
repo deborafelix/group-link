@@ -1,7 +1,9 @@
 import ListAllLinksService from '../services/ListAllLinksService';
 import { ok } from '../helpers/http-helper';
 
-class ListAllLinksController {
+import IBaseController from '../interfaces/BaseControllerInterface';
+
+class ListAllLinksController implements IBaseController {
   async handle() {
     const listAllLinksService = new ListAllLinksService();
     const result = await listAllLinksService.execute();

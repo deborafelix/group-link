@@ -1,8 +1,10 @@
-import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import CreateLinkService from '../services/CreateLinkService';
 import { created } from '../helpers/http-helper';
 
-class CreateLinkController {
+import IBaseController from '../interfaces/BaseControllerInterface';
+import IRequestPayload from '../interfaces/RequestPayloadInterface';
+
+class CreateLinkController implements IBaseController {
   async handle(payload: IRequestPayload) {
     const createLinkService = new CreateLinkService();
     const { group, url } = payload.body;
