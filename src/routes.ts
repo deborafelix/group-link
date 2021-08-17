@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { adapt } from './express-adapter';
+import adapt from './express-adapter';
 
 // Controllers Imports
 import CreateLinkController from './controllers/CreateLinkController';

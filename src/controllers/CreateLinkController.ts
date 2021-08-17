@@ -1,4 +1,4 @@
-import { IRequestPayload } from '../express-adapter';
+import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import CreateLinkService from '../services/CreateLinkService';
 
 class CreateLinkController {
