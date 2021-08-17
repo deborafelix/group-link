@@ -1,16 +1,17 @@
 import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import RemoveLinkService from '../services/RemoveLinkService';
+import { badRequest, noContent } from '../helpers/http-helper';
 
 class RemoveLinkController {
   async handle(payload: IRequestPayload) {
     const removeLinkService = new RemoveLinkService();
     const { id } = payload.params;
     if (!id) {
-      return { statusCode: 400, data: { message: 'Missed ID' } };
+      return badRequest(new Error('Missed ID'));
     }
     await removeLinkService.execute(id);
 
-    return { statusCode: 204, data: { message: 'Link is deleted' } };
+    return noContent();
   }
 }
 

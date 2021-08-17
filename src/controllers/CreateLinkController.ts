@@ -1,5 +1,6 @@
 import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import CreateLinkService from '../services/CreateLinkService';
+import { created } from '../helpers/http-helper';
 
 class CreateLinkController {
   async handle(payload: IRequestPayload) {
@@ -7,10 +8,7 @@ class CreateLinkController {
     const { group, url } = payload.body;
     const newLink = await createLinkService.execute({ group, url });
 
-    return {
-      statusCode: 201,
-      data: newLink,
-    };
+    return created(newLink);
   }
 }
 

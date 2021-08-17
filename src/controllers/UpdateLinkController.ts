@@ -1,3 +1,4 @@
+import { badRequest, noContent } from '../helpers/http-helper';
 import IRequestPayload from '../interfaces/RequestPayloadInterface';
 import UpdateLinkService from '../services/UpdateLinkService';
 
@@ -6,14 +7,17 @@ class UpdateLinkController {
     const updateLinkService = new UpdateLinkService();
     const { group, url, id } = payload.body;
     if (!id) {
-      return { statusCode: 400, data: { message: 'Missed ID' } };
+      return badRequest(new Error('Missed ID'));
     }
-    if (!group && !url) {
-      return { statusCode: 400, data: { message: 'Bad Request' } };
+    if (!group) {
+      return badRequest(new Error('Missed Group'));
+    }
+    if (!url) {
+      return badRequest(new Error('Missed URL'));
     }
     const fields = { group, url };
     await updateLinkService.execute(id, fields);
-    return { statusCode: 204, data: { message: 'Updated' } };
+    return noContent();
   }
 }
 

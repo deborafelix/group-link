@@ -1,14 +1,12 @@
 import ListAllLinksService from '../services/ListAllLinksService';
+import { ok } from '../helpers/http-helper';
 
 class ListAllLinksController {
   async handle() {
     const listAllLinksService = new ListAllLinksService();
     const result = await listAllLinksService.execute();
 
-    return {
-      statusCode: 200,
-      data: result,
-    };
+    return ok(result);
   }
 }
 
