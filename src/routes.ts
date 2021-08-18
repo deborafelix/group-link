@@ -16,11 +16,11 @@ const listOneGroupController = new ListOneGroupController();
 const updateLinkController = new UpdateLinkController();
 const removeLinkController = new RemoveLinkController();
 
-route.get('', adapt(listAllLinksController.handle));
-route.post('', adapt(createLinkController.handle));
-route.put('', adapt(updateLinkController.handle));
+route.get('', adapt(listAllLinksController));
+route.post('', adapt(createLinkController));
+route.put('', adapt(updateLinkController));
 
-route.delete('/:id', adapt(removeLinkController.handle));
-route.get('/:group', adapt(listOneGroupController.handle));
+route.delete('/:id', adapt(removeLinkController));
+route.get('/:group', adapt(listOneGroupController));
 
 export default route;
