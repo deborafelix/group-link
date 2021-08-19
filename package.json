@@ -1,45 +1,46 @@
 {
-   "name": "group-link",
-   "version": "1.0.0",
-   "description": "",
-   "main": "src/server.ts",
-   "scripts": {
-      "dev": "tsnd --transpile-only src/server.ts",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "ts-node src/index.ts",
-      "typeorm": "./node_modules/.bin/typeorm"
-   },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/deborafelix/group-link.git"
-   },
-   "keywords": [],
-   "author": "",
-   "license": "ISC",
-   "bugs": {
-      "url": "https://github.com/deborafelix/group-link/issues"
-   },
-   "homepage": "https://github.com/deborafelix/group-link#readme",
-   "dependencies": {
-      "@types/uuid": "^8.3.1",
-      "express": "^4.17.1",
-      "mongodb": "^3.6.0",
-      "reflect-metadata": "^0.1.10",
-      "typeorm": "0.2.37"
-   },
-   "devDependencies": {
-      "@types/es6-shim": "^0.31.42",
-      "@types/express": "^4.17.13",
-      "@types/jest": "^27.0.1",
-      "@types/node": "^16.6.1",
-      "@typescript-eslint/eslint-plugin": "^4.29.1",
-      "@typescript-eslint/parser": "^4.29.1",
-      "eslint": "^7.32.0",
-      "eslint-config-airbnb-base": "^14.2.1",
-      "eslint-plugin-import": "^2.24.0",
-      "nodemon": "^2.0.7",
-      "ts-node": "3.3.0",
-      "ts-node-dev": "^1.1.8",
-      "typescript": "^4.3.5"
-   }
+  "name": "group-link",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "tsnd --transpile-only src/server.ts",
+    "test": "jest",
+    "start": "ts-node src/index.ts",
+    "typeorm": "./node_modules/.bin/typeorm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deborafelix/group-link.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deborafelix/group-link/issues"
+  },
+  "homepage": "https://github.com/deborafelix/group-link#readme",
+  "dependencies": {
+    "@types/uuid": "^8.3.1",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "reflect-metadata": "^0.1.10",
+    "typeorm": "0.2.37"
+  },
+  "devDependencies": {
+    "@types/es6-shim": "^0.31.42",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.7",
+    "ts-node": "3.3.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
 }
