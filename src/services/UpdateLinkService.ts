@@ -5,7 +5,7 @@ import ICreateLinkFields from '../interfaces/CreateLinkFieldsInterface';
 class UpdateLinkService {
   async execute(id: string, updatedField: Partial<ICreateLinkFields>) {
     const linkRepository = getMongoRepository(Link);
-    return linkRepository.updateOne({
+    await linkRepository.updateOne({
       id,
     }, updatedField);
   }
