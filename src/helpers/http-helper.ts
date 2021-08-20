@@ -17,5 +17,5 @@ export const noContent = (): HttpResponse => ({
 
 export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
-  body: error,
+  body: error.message,
 });
