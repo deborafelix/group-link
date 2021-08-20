@@ -23,4 +23,17 @@ describe('Create Link Controller', () => {
     const result = await sut.handle(payload);
     expect(result).toBeDefined();
   });
+
+  it('should not create a link if already exists', async () => {
+    const payload = {
+      body: {
+        group: faker.random.word(),
+        url: faker.internet.url(),
+      },
+    };
+    spy.mockResolvedValue(null);
+    const sut = new CreateLinkController();
+    const result = await sut.handle(payload);
+    expect(result.statusCode).toBe(400);
+  });
 });
