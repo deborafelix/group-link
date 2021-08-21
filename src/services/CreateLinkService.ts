@@ -1,20 +1,25 @@
-import { getMongoRepository } from 'typeorm';
+import { MongoRepository } from 'typeorm';
 import Link from '../entities/Link';
 import ICreateLinkFields from '../interfaces/CreateLinkFieldsInterface';
 
 class CreateLinkService {
+  linkRepository: MongoRepository<Link>
+
+  constructor(linkRepository: MongoRepository<Link>) {
+    this.linkRepository = linkRepository;
+  }
+
   async execute(fields: ICreateLinkFields): Promise<Link | null> {
-    const linkRepository = getMongoRepository(Link);
     const { group, url } = fields;
-    const isNewGroupLink = await linkRepository.find({ group, url });
+    const isNewGroupLink = await this.linkRepository.find({ group, url });
     if (isNewGroupLink?.length > 0) {
       return null;
     }
-    const link = linkRepository.create({
+    const link = this.linkRepository.create({
       group,
       url,
     });
-    return linkRepository.save(link);
+    return this.linkRepository.save(link);
   }
 }
 
