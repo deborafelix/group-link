@@ -5,13 +5,18 @@ import IBaseController from '../interfaces/BaseControllerInterface';
 import IRequestPayload from '../interfaces/RequestPayloadInterface';
 
 class RemoveLinkController implements IBaseController {
+  removeLinkService: RemoveLinkService;
+
+  constructor(removeLinkService: RemoveLinkService) {
+    this.removeLinkService = removeLinkService;
+  }
+
   async handle(payload: IRequestPayload) {
-    const removeLinkService = new RemoveLinkService();
     const { id } = payload.params;
     if (!id) {
       return badRequest(new Error('Missed ID'));
     }
-    await removeLinkService.execute(id);
+    await this.removeLinkService.execute(id);
 
     return noContent();
   }

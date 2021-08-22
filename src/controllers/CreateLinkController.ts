@@ -12,6 +12,7 @@ class CreateLinkController implements IBaseController {
   }
 
   async handle(payload: IRequestPayload) {
+    console.log(payload);
     const { group, url } = payload.body;
     const newLink = await this.createLinkService.execute({ group, url });
     if (!newLink) {

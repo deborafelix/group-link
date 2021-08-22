@@ -4,9 +4,14 @@ import { ok } from '../helpers/http-helper';
 import IBaseController from '../interfaces/BaseControllerInterface';
 
 class ListAllLinksController implements IBaseController {
+  listAllLinksService: ListAllLinksService;
+
+  constructor(listAllLinksService: ListAllLinksService) {
+    this.listAllLinksService = listAllLinksService;
+  }
+
   async handle() {
-    const listAllLinksService = new ListAllLinksService();
-    const result = await listAllLinksService.execute();
+    const result = await this.listAllLinksService.execute();
 
     return ok(result);
   }

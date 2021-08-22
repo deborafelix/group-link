@@ -5,10 +5,15 @@ import IBaseController from '../interfaces/BaseControllerInterface';
 import IRequestPayload from '../interfaces/RequestPayloadInterface';
 
 class ListOneGroupController implements IBaseController {
+  listOneGroupService: ListOneGroupService;
+
+  constructor(listOneGroupService: ListOneGroupService) {
+    this.listOneGroupService = listOneGroupService;
+  }
+
   async handle(payload: IRequestPayload) {
-    const listOneGroupService = new ListOneGroupService();
     const { group } = payload.params;
-    const result = await listOneGroupService.execute(group);
+    const result = await this.listOneGroupService.execute(group);
 
     return ok(result);
   }
