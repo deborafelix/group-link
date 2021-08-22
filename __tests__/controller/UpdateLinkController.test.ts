@@ -1,9 +1,18 @@
 import faker from 'faker';
+import { Connection, createConnection, getMongoRepository } from 'typeorm';
 import UpdateLinkController from '../../src/controllers/UpdateLinkController';
+import Link from '../../src/entities/Link';
 import UpdateLinkService from '../../src/services/UpdateLinkService';
 
 describe('Update Link Controller', () => {
   const spy = jest.spyOn(UpdateLinkService.prototype, 'execute');
+  let connection: Connection;
+  beforeAll(async () => {
+    connection = await createConnection();
+  });
+  afterAll(async () => {
+    await connection.close();
+  });
 
   it('should update the group of the link', async () => {
     const payload = {
@@ -15,7 +24,7 @@ describe('Update Link Controller', () => {
     };
     spy.mockResolvedValue();
 
-    const sut = new UpdateLinkController();
+    const sut = new UpdateLinkController(new UpdateLinkService(getMongoRepository(Link)));
     const result = await sut.handle(payload);
     expect(result).toBeDefined();
     expect(result.statusCode).toBe(204);
@@ -30,7 +39,7 @@ describe('Update Link Controller', () => {
     };
     spy.mockResolvedValue();
 
-    const sut = new UpdateLinkController();
+    const sut = new UpdateLinkController(new UpdateLinkService(getMongoRepository(Link)));
     const result = await sut.handle(payload);
     expect(result).toBeDefined();
     expect(result.statusCode).toBe(400);
@@ -45,7 +54,7 @@ describe('Update Link Controller', () => {
     };
     spy.mockResolvedValue();
 
-    const sut = new UpdateLinkController();
+    const sut = new UpdateLinkController(new UpdateLinkService(getMongoRepository(Link)));
     const result = await sut.handle(payload);
     expect(result).toBeDefined();
     expect(result.statusCode).toBe(400);
@@ -60,7 +69,7 @@ describe('Update Link Controller', () => {
     };
     spy.mockResolvedValue();
 
-    const sut = new UpdateLinkController();
+    const sut = new UpdateLinkController(new UpdateLinkService(getMongoRepository(Link)));
     const result = await sut.handle(payload);
     expect(result).toBeDefined();
     expect(result.statusCode).toBe(400);
