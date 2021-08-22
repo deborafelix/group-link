@@ -10,7 +10,7 @@ class UpdateLinkService {
   }
 
   async execute(id: string, updatedField: Partial<ICreateLinkFields>) {
-    await this.linkRepository.updateOne({
+    await this.linkRepository.update({
       id,
     }, updatedField);
   }
