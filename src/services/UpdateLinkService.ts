@@ -1,11 +1,16 @@
-import { getMongoRepository } from 'typeorm';
+import { MongoRepository } from 'typeorm';
 import Link from '../entities/Link';
 import ICreateLinkFields from '../interfaces/CreateLinkFieldsInterface';
 
 class UpdateLinkService {
+  linkRepository: MongoRepository<Link>
+
+  constructor(linkRepository: MongoRepository<Link>) {
+    this.linkRepository = linkRepository;
+  }
+
   async execute(id: string, updatedField: Partial<ICreateLinkFields>) {
-    const linkRepository = getMongoRepository(Link);
-    await linkRepository.updateOne({
+    await this.linkRepository.updateOne({
       id,
     }, updatedField);
   }
