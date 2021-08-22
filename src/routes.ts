@@ -1,34 +1,43 @@
-import { Router } from 'express';
-import { getMongoRepository } from 'typeorm';
+import { Application, Router } from 'express';
+import { createConnection, getMongoRepository } from 'typeorm';
 import adapt from './express-adapter';
+import Link from './entities/Link';
 
-// Controllers Imports
 import CreateLinkController from './controllers/CreateLinkController';
 import ListAllLinksController from './controllers/ListAllLinksController';
 import ListOneGroupController from './controllers/ListOneGroupController';
 import UpdateLinkController from './controllers/UpdateLinkController';
 import RemoveLinkController from './controllers/RemoveLinkController';
 
-// Services Imports
 import CreateLinkService from './services/CreateLinkService';
-import Link from './entities/Link';
+import ListAllLinksService from './services/ListAllLinksService';
+import ListOneGroupService from './services/ListOneGroupService';
+import UpdateLinkService from './services/UpdateLinkService';
+import RemoveLinkService from './services/RemoveLinkService';
 
-const route = Router();
+const configRoutes = async (app: Application) => {
+  const route = Router();
 
-const linkRepository = getMongoRepository(Link);
-const createLinkService = new CreateLinkService(linkRepository);
+  const linkRepository = getMongoRepository(Link);
+  const createLinkService = new CreateLinkService(linkRepository);
+  const listAllLinksService = new ListAllLinksService(linkRepository);
+  const listOneGroupService = new ListOneGroupService(linkRepository);
+  const updateLinkService = new UpdateLinkService(linkRepository);
+  const removeLinkService = new RemoveLinkService(linkRepository);
 
-const createLinkController = new CreateLinkController(createLinkService);
-const listAllLinksController = new ListAllLinksController();
-const listOneGroupController = new ListOneGroupController();
-const updateLinkController = new UpdateLinkController();
-const removeLinkController = new RemoveLinkController();
+  const createLinkController = new CreateLinkController(createLinkService);
+  const listAllLinksController = new ListAllLinksController(listAllLinksService);
+  const listOneGroupController = new ListOneGroupController(listOneGroupService);
+  const updateLinkController = new UpdateLinkController(updateLinkService);
+  const removeLinkController = new RemoveLinkController(removeLinkService);
 
-route.get('', adapt(listAllLinksController));
-route.post('', adapt(createLinkController));
-route.put('', adapt(updateLinkController));
+  route.get('/grouplink', adapt(listAllLinksController));
+  route.post('/grouplink', adapt(createLinkController));
+  route.put('/grouplink', adapt(updateLinkController));
 
-route.delete('/:id', adapt(removeLinkController));
-route.get('/:group', adapt(listOneGroupController));
+  route.delete('/grouplink/:id', adapt(removeLinkController));
+  route.get('/grouplink/:group', adapt(listOneGroupController));
+  app.use(route);
+};
 
-export default route;
+export default configRoutes;
