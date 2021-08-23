@@ -4,6 +4,7 @@ import {
 } from 'typeorm';
 import Link from '../../src/entities/Link';
 import RemoveLinkService from '../../src/services/RemoveLinkService';
+import setupDB from '../utils/db';
 
 describe('Remove Link Service', () => {
   let connection: Connection;
@@ -15,7 +16,8 @@ describe('Remove Link Service', () => {
   };
 
   beforeAll(async () => {
-    connection = await createConnection();
+    const connectionOpt = await setupDB();
+    connection = await createConnection(connectionOpt);
     linkRepository = getMongoRepository(Link);
     link = await (await linkRepository.insert(createdBefore)).raw;
   });

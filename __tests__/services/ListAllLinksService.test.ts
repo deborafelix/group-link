@@ -4,6 +4,7 @@ import {
 } from 'typeorm';
 import Link from '../../src/entities/Link';
 import ListAllLinksService from '../../src/services/ListAllLinksService';
+import setupDB from '../utils/db';
 
 describe('List All Links Service', () => {
   let connection: Connection;
@@ -15,7 +16,8 @@ describe('List All Links Service', () => {
   };
 
   beforeAll(async () => {
-    connection = await createConnection();
+    const connectionOpt = await setupDB();
+    connection = await createConnection(connectionOpt);
     linkRepository = getMongoRepository(Link);
     link = await (await linkRepository.insert(createdBefore)).raw;
   });
