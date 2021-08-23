@@ -24,6 +24,7 @@
     "@types/uuid": "^8.3.1",
     "express": "^4.17.1",
     "mongodb": "^3.6.0",
+    "mongodb-memory-server": "^7.3.6",
     "reflect-metadata": "^0.1.10",
     "typeorm": "0.2.37"
   },
