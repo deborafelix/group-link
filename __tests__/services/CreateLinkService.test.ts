@@ -1,19 +1,16 @@
-import faker from 'faker';
 import {
   Connection, createConnection, getMongoRepository, MongoRepository,
 } from 'typeorm';
 import Link from '../../src/entities/Link';
 import CreateLinkService from '../../src/services/CreateLinkService';
+import createLink from '../utils/createLink';
 import setupDB from '../utils/db';
 
 describe('Create Link Service', () => {
   let connection: Connection;
   let link: Link;
   let linkRepository: MongoRepository<Link>;
-  const createdBefore = {
-    group: faker.random.word(),
-    url: faker.internet.url(),
-  };
+  const createdBefore = createLink();
 
   beforeAll(async () => {
     const connectionOpt = await setupDB();
@@ -28,10 +25,7 @@ describe('Create Link Service', () => {
   });
 
   it('should create a link', async () => {
-    const payload = {
-      group: faker.random.word(),
-      url: faker.internet.url(),
-    };
+    const payload = createLink();
     const sut = new CreateLinkService(linkRepository);
     const result = await sut.execute(payload);
     expect(result).toBeDefined();

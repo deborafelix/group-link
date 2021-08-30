@@ -1,4 +1,8 @@
 export default interface ICreateLinkFields {
-  group: string,
-  url: string
-};
+  title: string;
+  icon: string;
+  url: string;
+  description: string;
+  group: string;
+  fav: boolean;
+}

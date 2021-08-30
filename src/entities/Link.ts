@@ -8,10 +8,22 @@ class Link {
     readonly id: string;
 
     @Column()
-    group: string;
+    title: string;
+
+    @Column()
+    icon: string;
 
     @Column()
     url: string;
+
+    @Column()
+    description: string;
+
+    @Column()
+    group: string;
+
+    @Column()
+    fav: boolean;
 
     @CreateDateColumn()
     createdAt: Date;

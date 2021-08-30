@@ -3,6 +3,7 @@ import { Connection, createConnection, getMongoRepository } from 'typeorm';
 import UpdateLinkController from '../../src/controllers/UpdateLinkController';
 import Link from '../../src/entities/Link';
 import UpdateLinkService from '../../src/services/UpdateLinkService';
+import createLink from '../utils/createLink';
 
 describe('Update Link Controller', () => {
   const spy = jest.spyOn(UpdateLinkService.prototype, 'execute');
@@ -18,8 +19,7 @@ describe('Update Link Controller', () => {
     const payload = {
       body: {
         id: faker.datatype.uuid(),
-        group: faker.random.word(),
-        url: faker.internet.url(),
+        ...createLink(),
       },
     };
     spy.mockResolvedValue();
@@ -32,10 +32,7 @@ describe('Update Link Controller', () => {
 
   it('should not update because missing id', async () => {
     const payload = {
-      body: {
-        group: faker.random.word(),
-        url: faker.internet.url(),
-      },
+      body: createLink(),
     };
     spy.mockResolvedValue();
 

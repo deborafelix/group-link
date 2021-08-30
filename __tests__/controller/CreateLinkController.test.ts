@@ -3,6 +3,7 @@ import { Connection, createConnection, getMongoRepository } from 'typeorm';
 import CreateLinkController from '../../src/controllers/CreateLinkController';
 import Link from '../../src/entities/Link';
 import CreateLinkService from '../../src/services/CreateLinkService';
+import createLink from '../utils/createLink';
 
 describe('Create Link Controller', () => {
   const spy = jest.spyOn(CreateLinkService.prototype, 'execute');
@@ -16,15 +17,11 @@ describe('Create Link Controller', () => {
 
   it('should create a link', async () => {
     const payload = {
-      body: {
-        group: faker.random.word(),
-        url: faker.internet.url(),
-      },
+      body: createLink(),
     };
     spy.mockResolvedValue({
       id: faker.datatype.uuid(),
-      group: payload.body.group,
-      url: payload.body.url,
+      ...createLink(),
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -35,10 +32,7 @@ describe('Create Link Controller', () => {
 
   it('should not create a link if already exists', async () => {
     const payload = {
-      body: {
-        group: faker.random.word(),
-        url: faker.internet.url(),
-      },
+      body: createLink(),
     };
     spy.mockResolvedValue(null);
     const sut = new CreateLinkController(new CreateLinkService(getMongoRepository(Link)));

@@ -10,14 +10,32 @@ class CreateLinkService {
   }
 
   async execute(fields: ICreateLinkFields): Promise<Link | null> {
-    const { group, url } = fields;
-    const isNewGroupLink = await this.linkRepository.find({ group, url });
+    const {
+      title,
+      icon,
+      url,
+      description,
+      group,
+      fav,
+    } = fields;
+    const isNewGroupLink = await this.linkRepository.find({
+      title,
+      icon,
+      url,
+      description,
+      group,
+      fav,
+    });
     if (isNewGroupLink.length > 0) {
       return null;
     }
     const link = this.linkRepository.create({
-      group,
+      title,
+      icon,
       url,
+      description,
+      group,
+      fav,
     });
     return this.linkRepository.save(link);
   }

@@ -3,6 +3,7 @@ import { Connection, createConnection, getMongoRepository } from 'typeorm';
 import ListOneGroupController from '../../src/controllers/ListOneGroupController';
 import Link from '../../src/entities/Link';
 import ListOneGroupService from '../../src/services/ListOneGroupService';
+import createLink from '../utils/createLink';
 
 describe('List One Group Controller', () => {
   const spy = jest.spyOn(ListOneGroupService.prototype, 'execute');
@@ -21,15 +22,13 @@ describe('List One Group Controller', () => {
     };
     spy.mockResolvedValue([{
       id: faker.datatype.uuid(),
-      group: payload.params.group,
-      url: faker.internet.url(),
+      ...createLink(),
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
       id: faker.datatype.uuid(),
-      group: payload.params.group,
-      url: faker.internet.url(),
+      ...createLink(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }]);

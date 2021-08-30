@@ -3,6 +3,7 @@ import { Connection, createConnection, getMongoRepository } from 'typeorm';
 import ListAllLinksController from '../../src/controllers/ListAllLinksController';
 import Link from '../../src/entities/Link';
 import ListAllLinksService from '../../src/services/ListAllLinksService';
+import createLink from '../utils/createLink';
 
 describe('List All Links Controller', () => {
   const spy = jest.spyOn(ListAllLinksService.prototype, 'execute');
@@ -16,15 +17,13 @@ describe('List All Links Controller', () => {
   it('should list all links', async () => {
     spy.mockResolvedValue([{
       id: faker.datatype.uuid(),
-      group: faker.random.word(),
-      url: faker.internet.url(),
+      ...createLink(),
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
       id: faker.datatype.uuid(),
-      group: faker.random.word(),
-      url: faker.internet.url(),
+      ...createLink(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }]);
