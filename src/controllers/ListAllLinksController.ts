@@ -12,7 +12,7 @@ class ListAllLinksController implements IBaseController {
 
   async handle() {
     const result = await this.listAllLinksService.execute();
-
+    console.log(result);
     return ok(result);
   }
 }

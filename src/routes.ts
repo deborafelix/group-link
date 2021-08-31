@@ -1,5 +1,5 @@
 import { Application, Router } from 'express';
-import { createConnection, getMongoRepository } from 'typeorm';
+import { getMongoRepository } from 'typeorm';
 import adapt from './express-adapter';
 import Link from './entities/Link';
 

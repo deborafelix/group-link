@@ -19,12 +19,8 @@ class CreateLinkService {
       fav,
     } = fields;
     const isNewGroupLink = await this.linkRepository.find({
-      title,
-      icon,
-      url,
-      description,
       group,
-      fav,
+      url,
     });
     if (isNewGroupLink.length > 0) {
       return null;
