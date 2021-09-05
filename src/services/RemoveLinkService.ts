@@ -9,7 +9,8 @@ class RemoveLinkService {
   }
 
   async execute(id: string) {
-    await this.linkRepository.deleteOne({ id });
+    const link = await this.linkRepository.findOne(id);
+    await this.linkRepository.remove(link);
   }
 }
 
