@@ -8,8 +8,8 @@ class RemoveLinkService {
     this.linkRepository = linkRepository;
   }
 
-  async execute(id: string) {
-    const link = await this.linkRepository.findOne(id);
+  async execute(id: string, userId: string) {
+    const link = await this.linkRepository.findOne({id, userId});
     await this.linkRepository.remove(link);
   }
 }

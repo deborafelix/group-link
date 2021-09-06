@@ -13,10 +13,11 @@ class RemoveLinkController implements IBaseController {
 
   async handle(payload: IRequestPayload) {
     const { id } = payload.params;
+    const {userId} = payload.body;
     if (!id) {
       return badRequest(new Error('Missed ID'));
     }
-    await this.removeLinkService.execute(id);
+    await this.removeLinkService.execute(id, userId);
     return noContent();
   }
 }

@@ -13,20 +13,18 @@ class CreateLinkController implements IBaseController {
 
   async handle(payload: IRequestPayload) {
     const {
+      userId,
       title,
       icon,
       url,
-      description,
-      group,
-      fav,
+      description
     } = payload.body;
     const newLink = await this.createLinkService.execute({
+      userId,
       title,
       icon,
       url,
-      description,
-      group,
-      fav,
+      description
     });
     if (!newLink) {
       return badRequest(new Error('This group already exists'));

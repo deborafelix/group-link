@@ -10,7 +10,7 @@ class UpdateLinkService {
   }
 
   async execute(id: string, updatedField: Partial<ICreateLinkFields>) {
-    const link = await this.linkRepository.findOne(id);
+    const link = await this.linkRepository.findOne({id, userId: updatedField.userId});
     const updatedLink = {...link, ...updatedField}
     await this.linkRepository.save(updatedLink);
   }

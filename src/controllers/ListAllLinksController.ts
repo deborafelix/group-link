@@ -2,6 +2,7 @@ import ListAllLinksService from '../services/ListAllLinksService';
 import { ok } from '../helpers/http-helper';
 
 import IBaseController from '../interfaces/BaseControllerInterface';
+import IRequestPayload from '../interfaces/RequestPayloadInterface';
 
 class ListAllLinksController implements IBaseController {
   listAllLinksService: ListAllLinksService;
@@ -10,8 +11,9 @@ class ListAllLinksController implements IBaseController {
     this.listAllLinksService = listAllLinksService;
   }
 
-  async handle() {
-    const result = await this.listAllLinksService.execute();
+  async handle(payload: IRequestPayload) {
+    const {userId} = payload.body;
+    const result = await this.listAllLinksService.execute(userId);
     return ok(result);
   }
 }

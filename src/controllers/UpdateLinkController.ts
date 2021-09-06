@@ -12,14 +12,14 @@ class UpdateLinkController implements IBaseController {
   }
 
   async handle(payload: IRequestPayload) {
-    const { title, url, icon, description, id } = payload.body;
+    const { title, url, icon, description, id, userId } = payload.body;
     if (!id) {
       return badRequest(new Error('Missed ID'));
     }
     if (!url) {
       return badRequest(new Error('Missed URL'));
     }
-    const fields = { title, url, icon, description };
+    const fields = { title, url, icon, description, userId };
     await this.updateLinkService.execute(id, fields);
     return noContent();
   }

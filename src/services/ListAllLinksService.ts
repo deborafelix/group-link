@@ -8,8 +8,8 @@ class ListAllLinksService {
     this.linkRepository = linkRepository;
   }
 
-  async execute() {
-    return this.linkRepository.find();
+  async execute(userId: string) {
+    return this.linkRepository.find({userId});
   }
 }
 
