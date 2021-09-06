@@ -3,9 +3,12 @@ import {
 } from 'typeorm';
 
 @Entity('links')
-class Link {
+export default  class Link {
     @ObjectIdColumn()
     readonly id: string;
+
+    @Column()
+    userId: string;
 
     @Column()
     title: string;
@@ -19,17 +22,9 @@ class Link {
     @Column()
     description: string;
 
-    @Column()
-    group: string;
-
-    @Column()
-    fav: boolean;
-
     @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
-
-export default Link;

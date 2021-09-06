@@ -19,3 +19,8 @@ export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
   body: error.message,
 });
+
+export const notAuthorized = (error: Error): HttpResponse => ({
+  statusCode: 401,
+  body: error.message,
+});

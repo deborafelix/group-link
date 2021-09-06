@@ -11,27 +11,25 @@ class CreateLinkService {
 
   async execute(fields: ICreateLinkFields): Promise<Link | null> {
     const {
+      userId,
       title,
       icon,
       url,
       description,
-      group,
-      fav,
     } = fields;
     const isNewGroupLink = await this.linkRepository.find({
-      group,
+      userId,
       url,
     });
     if (isNewGroupLink.length > 0) {
       return null;
     }
     const link = this.linkRepository.create({
+      userId,
       title,
       icon,
       url,
       description,
-      group,
-      fav,
     });
     return this.linkRepository.save(link);
   }
