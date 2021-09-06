@@ -17,7 +17,6 @@ class RemoveLinkController implements IBaseController {
       return badRequest(new Error('Missed ID'));
     }
     await this.removeLinkService.execute(id);
-    console.log("apagado!");
     return noContent();
   }
 }
