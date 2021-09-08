@@ -5,7 +5,7 @@ import Link from '../../src/entities/Link';
 import CreateLinkService from '../../src/services/CreateLinkService';
 import createLink from '../utils/createLink';
 import setupDB from '../utils/db';
-
+jest.setTimeout(100000)
 describe('Create Link Service', () => {
   let connection: Connection;
   let link: Link;

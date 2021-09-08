@@ -29,7 +29,7 @@ describe('Remove Link Service', () => {
 
   it('should remove link', async () => {
     const sut = new RemoveLinkService(linkRepository);
-    const result = await sut.execute(link.id);
+    const result = await sut.execute(link.id, link.userId);
     expect(result).toBeUndefined();
   });
 });

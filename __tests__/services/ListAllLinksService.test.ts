@@ -26,7 +26,7 @@ describe('List All Links Service', () => {
 
   it('should list all links', async () => {
     const sut = new ListAllLinksService(linkRepository);
-    const result = await sut.execute();
+    const result = await sut.execute(link.userId);
     expect(result).toBeDefined();
   });
 });

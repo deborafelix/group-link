@@ -1,6 +1,6 @@
 import faker from 'faker';
 import {
-  Connection, createConnection, getMongoRepository, MongoRepository,
+  Connection, createConnection, getMongoRepository, MongoRepository, QueryFailedError,
 } from 'typeorm';
 import Link from '../../src/entities/Link';
 import UpdateLinkService from '../../src/services/UpdateLinkService';
@@ -33,7 +33,7 @@ describe('Update Link Service', () => {
       url: faker.internet.url(),
     };
     const sut = new UpdateLinkService(linkRepository);
-    const result = await sut.execute(link.id, { group: createdBefore.group });
+    const result = await sut.execute(link.id, { url: '123' });
     expect(result).toBeUndefined();
   });
 });

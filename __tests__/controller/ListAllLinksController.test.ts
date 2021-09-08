@@ -29,7 +29,7 @@ describe('List All Links Controller', () => {
     }]);
 
     const sut = new ListAllLinksController(new ListAllLinksService(getMongoRepository(Link)));
-    const result = await sut.handle();
+    const result = await sut.handle({});
     expect(result).toBeDefined();
     expect(result).toHaveProperty('body');
     expect(result.body.length).toBeGreaterThan(0);
