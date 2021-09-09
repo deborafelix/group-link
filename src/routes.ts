@@ -39,8 +39,8 @@ const configRoutes = async (app: Application) => {
   const createUserController = new CreateUserController(createUserService);
   const loginController = new LoginController(loginService);
 
-  route.post('/login', adapt(loginController));
-  route.post('/user', adapt(createUserController));
+  route.post('/grouplink/login', adapt(loginController));
+  route.post('/grouplink/user', adapt(createUserController));
 
   route.get('/grouplink', authMiddlware, adapt(listAllLinksController));
   route.post('/grouplink', authMiddlware, adapt(createLinkController));

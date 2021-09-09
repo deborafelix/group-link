@@ -1,5 +1,6 @@
 import { MongoRepository } from 'typeorm';
 import User from '../entities/User';
+import ICreatedUser from '../interfaces/CreatedUserInterface';
 import ICreateUserFields from '../interfaces/CreateUserFieldsInterface';
 
 class CreateUserService {
@@ -9,7 +10,7 @@ class CreateUserService {
     this.userRepository = userRepository;
   }
 
-  async execute(fields: ICreateUserFields): Promise<User | null> {
+  async execute(fields: ICreateUserFields): Promise<ICreatedUser | null> {
     const {
       name,
       email,
@@ -27,7 +28,8 @@ class CreateUserService {
         password
     });
     await user.generatePassword(password);
-    return this.userRepository.save(user);
+    await this.userRepository.save(user);
+    return {name, email, id: user.id, }
   }
 }
 
